@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -49,3 +49,15 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def  game():
+    username = input("Please provide your characters name: ")
+    player = Player(username)
+
+    print(f"Hello, {player}")
+
+    move = input("Please select a direction to move: \n [n] North | [s] South | [e] East | [w] West \n")
+    # while player.victory == False:
+
+
+game()
