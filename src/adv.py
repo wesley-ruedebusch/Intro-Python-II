@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 # Declare all the rooms
 
 room = {
@@ -50,14 +51,58 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 
-def  game():
+def game():
     username = input("Please provide your characters name: ")
-    player = Player(username)
+    first_room = room['outside']
+    player = Player(username, first_room)
 
-    print(f"Hello, {player}")
+    print(f"\n    Hello {player}, you are ")
+    # print(
+    #     f"        {player.current_room.name}. {player.current_room.description}\n\n")
+        ################################
+    print(player.player_room())
+    move = input(
+        "Please select a direction to move and then press [enter]: \n [n] North | [s] South | [e] East | [w] West | [q] quit \n").lower()
 
-    move = input("Please select a direction to move: \n [n] North | [s] South | [e] East | [w] West \n")
-    # while player.victory == False:
+    while player.victory == False:
+        if move == "q":
+            print("\n You'll never reach the treasure now! Bye forever. \n")
+            exit()
+        try:
+            if move == "n":
+                player.set_location(player.current_room.n_to)
+                
+            elif move == "s":
+                player.set_location(player.current_room.s_to)
+               
+            elif move == "e":
+                player.set_location(player.current_room.e_to)
+                
+            elif move == "w":
+                player.set_location(player.current_room.w_to)
+                
+            else:
+                # incorrect direction value, throw error
+                raise ValueError
 
+        except ValueError:
+            print("\n !!! Select a valid direction !!!")
+
+        except:
+            print("\n !!! There is nowhere to move in this direction !!! \n")
+
+        print(f"\n    {player}, you are in the")
+        # print(
+        #     f"        {player.current_room.name}. {player.current_room.description} \n")
+        print(player.player_room())
+
+        # print({player.current_room.room_items})
+        # for when player reaches end of game
+        if player.current_room == room['treasure']:
+            print("\nCongratulations, you have reached the end of the game!\n")
+            exit()
+        # reassign the move variable before next loop starts
+        move = input(
+            "Please select a direction to move and then press [enter]: \n [n] North | [s] South | [e] East | [w] West | [q] quit \n\n").lower()
 
 game()

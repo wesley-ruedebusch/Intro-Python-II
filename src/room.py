@@ -2,12 +2,21 @@
 # description attributes.
 
 class Room:
-    def __init__(self, name, description):
+    def __init__(self, name, description, room_items=[]):
         self.name = name
         self.description = description
+        self.room_items = room_items
+       
 
     def __str__(self):
-        return f"Room Name: {self.name}, Description: {self.description}"
+        # for empty item lsit
+        if self.room_items == []:
+            return f"{self.name}. {self.description}."
+        else:
+            items = ""
+            for item in self.room_items:
+                items += item.name + " " + item.description + " "
+            return f"{self.name}. {self.description}. Look, there are some old things on the ground: {items}"
 
     def get_name(self):
         return self.name

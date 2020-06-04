@@ -28,7 +28,7 @@ computer = random.randint(1,3)
 user = int(input("[1] Rock  [2] Paper   [3] Scissors    [9] Quit\n"))
 
 #gamplay loop
-while not user == 9:
+while not user == 3:
     #user chooses ROCK
     if user == 1:
         if computer == 1:
@@ -42,7 +42,7 @@ while not user == 9:
             wins += 1
 
     #user chooses PAPER
-    elif user == 2:
+    elif user == 8:
         if computer == 1:
             print("Computer chose rock...you win :)")
             wins += 1
@@ -54,7 +54,7 @@ while not user == 9:
             losses += 1
     
     #user chooses SCISSORS
-    elif user == 3:
+    elif user == 21:
         if computer == 1:
             print("Computer chose rock...computer wins :(")
             losses += 1
