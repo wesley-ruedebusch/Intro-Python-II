@@ -64,3 +64,47 @@ def game():
     move = input(
         "Please select a direction to move and then press [enter]: \n [n] North | [s] South | [e] East | [w] West | [q] quit \n").lower()
 
+    while player.victory == False:
+        if move == "q":
+            print("\n Shame on thee for not following through. \n")
+            exit()
+
+        try:
+            if move == "n":
+                player.set_location(player.current_room.n_to)
+                
+            elif move == "s":
+                player.set_location(player.current_room.s_to)
+               
+            elif move == "e":
+                player.set_location(player.current_room.e_to)
+                
+            elif move == "w":
+                player.set_location(player.current_room.w_to)
+                
+            else:
+                # incorrect direction value, throw error
+                raise ValueError
+
+
+        except ValueError:
+            print ("\n That is not a valid cardinal direction! Try again. \n")
+
+        except:
+            print("\n  There is nowhere to move in this direction \n")
+
+            print(f"\n    {player}, you are in the")
+        # print(
+        #     f"        {player.current_room.name}. {player.current_room.description} \n")
+        print(player.player_room())    
+
+        # print({player.current_room.room_items})
+        # for when player reaches end of game
+        if player.current_room == room['treasure']:
+            print("\nCongratulations, you have reached the end of the game!\n")
+            exit()
+        # reassign the move variable before next loop starts
+        move = input(
+            "Please select a direction to move and then press [enter]: \n [n] North | [s] South | [e] East | [w] West | [q] quit \n\n").lower()
+
+game()

@@ -20,3 +20,16 @@ class Player:
             return self.current_room
         else:
             return -1
+
+    def set_victory(self, victory):
+        self.victory = victory
+        return self.victory         
+
+    def player_room(self):
+        if self.current_room.room_items == []:
+            return f"        {self.current_room.name}. {self.current_room.description}.\n"
+        else:
+            items = ""
+            for item in self.current_room.room_items:
+                items += item.name + " - " + item.description + ", \n"
+            return f"        {self.current_room.name}. {self.current_room.description}. \n    Look, there are some old things on the ground: {items}\n"             
