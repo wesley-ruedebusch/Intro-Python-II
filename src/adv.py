@@ -2,6 +2,13 @@ from room import Room
 from player import Player
 from item import Item
 
+item = {
+    "torch": Item("torch", "May this be the light that guides you."),
+    "watch": Item("watch", "Don't be late for dinner!"),
+    "blackcat": Item("blackcat", "A blackcat walking in your path is bad luck.....normally"),
+    "sword": Item("sword", "It's just a rusty skiver but in your adventure its your excalibur.")
+}
+
 # Declare all the rooms
 
 room = {
@@ -34,6 +41,11 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+
+# put items in the rooms
+room['outside'].room_items = [item["watch"]]
+room['overlook'].room_items = [item["torch"], item["blackcat"]]
+room['narrow'].room_items = [item["sword"]]
 
 #
 # Main
@@ -81,7 +93,18 @@ def game():
                 
             elif move == "w":
                 player.set_location(player.current_room.w_to)
-                
+
+            elif move.split(" ")[0] == "get":
+                picked_item = move.split(" ")[1] 
+                print(player.get_item(picked_item))
+
+            elif move.split(" ")[0] ==  "drop":
+                print(player.drop_item(picked_item))
+
+            elif move == "i":
+                print("You have found these items:")
+                # for items in player.player_items:
+                print(player.player_items)          
             else:
                 # incorrect direction value, throw error
                 raise ValueError
